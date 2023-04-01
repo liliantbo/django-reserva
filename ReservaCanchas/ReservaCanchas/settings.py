@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'ReservaCanchas.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'proyecto',
         'USER': 'root',
         'PASSWORD': 'password',
