@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Mis compras</h1>
+  {% if compras %}
+    <ul>
+      {% for compra in compras %}
+        <li>{{ compra.entrada.concierto.artista }} - {{ compra.entrada.concierto.lugar }} ({{ compra.entrada.concierto.fecha }}) - {{ compra.fecha }}</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No tienes compras registradas.</p>
+  {% endif %}
+{% endblock %}

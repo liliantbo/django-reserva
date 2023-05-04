@@ -1,0 +1,18 @@
+<html>
+   <head>
+      <title>Canchas Reserva</title>
+   </head>
+   <body>
+        {% include 'navbar.html' %}
+        <h1>Canchas</h1>
+        <ul>
+            {% for id_cancha, nombre_cancha in listado %}
+            <li>
+                <a href="/getInfoCanchaById/{{id_cancha}}">
+                {{nombre_cancha}}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+   </body>
+</html>

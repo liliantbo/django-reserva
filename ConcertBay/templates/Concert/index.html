@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Próximos conciertos:</h1>
+<ul>
+{% for concierto in conciertos %}
+    <li><a href="{% url 'Concert:comprar_entrada' concierto_id=concierto.id %}">{{ concierto.artista }} - {{ concierto.lugar }} ({{ concierto.fecha }})</a></li>
+{% empty %}
+    <li>No hay conciertos próximos</li>
+{% endfor %}
+</ul>
+{% endblock %}
