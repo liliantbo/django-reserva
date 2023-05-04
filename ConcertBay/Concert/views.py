@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Sum
+from collections import defaultdict
 
 # Create your views here.
 from django.contrib.auth import authenticate, login, logout
@@ -79,7 +80,10 @@ def index(request):
 @login_required
 def compra_list(request):
     compras = Ticket.objects.filter(usuario=request.user)
-    return render(request, 'Concert/compra_list.html', {'compras': compras})
+    compras_por_concierto = defaultdict(list)
+    for compra in compras:
+        compras_por_concierto[compra.concierto].append(compra)
+    return render(request, 'Concert/compra_list.html', {'compras': compras, 'compras_por_concierto': compras_por_concierto})
 
 def concierto_detalle(request, concierto_id):
     concierto = get_object_or_404(Concierto, pk=concierto_id)

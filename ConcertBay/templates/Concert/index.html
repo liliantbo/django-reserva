@@ -1,31 +1,33 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Próximos conciertos:</h1>
-<table>
-  <thead>
-    <tr>
-      <th>Artista</th>
-      <th>Nombre del concierto</th>
-      <th>Lugar</th>
-      <th>Fecha</th>
-      <th>Acciones</th>
-    </tr>
-  </thead>
-  <tbody>
-  {% for concierto in conciertos %}
-    <tr>
-      <td>{{ concierto.artista }}</td>
-      <td>{{ concierto.nombre }}</td>
-      <td>{{ concierto.lugar }}</td>
-      <td>{{ concierto.fecha }}</td>
-      <td><a href="{% url 'Concert:concierto_detalle' concierto_id=concierto.id %}">Ver más detalles</a></td>
-    </tr>
-  {% empty %}
-    <tr>
-      <td colspan="6">No hay conciertos próximos</td>
-    </tr>
-  {% endfor %}
-  </tbody>
-</table>
+  <div class="container">
+    <h1>Próximos conciertos:</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Artista</th>
+          <th>Nombre del concierto</th>
+          <th>Lugar</th>
+          <th>Fecha</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for concierto in conciertos %}
+        <tr>
+          <td>{{ concierto.artista }}</td>
+          <td>{{ concierto.nombre }}</td>
+          <td>{{ concierto.lugar }}</td>
+          <td>{{ concierto.fecha }}</td>
+          <td><a href="{% url 'Concert:concierto_detalle' concierto_id=concierto.id %}" class="btn btn-primary">Ver más detalles</a></td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="6">No hay conciertos próximos</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
 {% endblock %}

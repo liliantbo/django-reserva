@@ -1,14 +1,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>Mis compras</h1>
-  {% if compras %}
-    <ul>
-      {% for compra in compras %}
-      <li>{{ compra.concierto.artista }} - {{ compra.concierto.lugar }} ({{ compra.concierto.fecha }}) - {{ compra.localidad.nombre }}</li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p>No tienes compras registradas.</p>
-  {% endif %}
+  <div class="container">
+    <h1 class="mt-5">Mis compras</h1>
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        {% if compras %}
+          <ul class="list-group mt-3">
+            {% for compra in compras %}
+            <li class="list-group-item">{{ compra.concierto.artista }} - {{ compra.concierto.lugar }} ({{ compra.concierto.fecha }}) - {{ compra.localidad.nombre }}</li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="mt-3">No tienes compras registradas.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
 {% endblock %}

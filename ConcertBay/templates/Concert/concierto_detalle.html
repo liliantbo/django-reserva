@@ -7,7 +7,7 @@
   <p><strong>Fecha:</strong> {{ concierto.fecha }}</p>
 
   <h2>Localidades:</h2>
-  <table>
+  <table class="table">
       <thead>
           <tr>
               <th>Nombre</th>
@@ -27,9 +27,9 @@
                           {% csrf_token %}
                           <input type="hidden" name="localidad" value="{{ localidad.id }}">
                           {% if localidad.cantidad_disponible > 0 %}
-                             <button type="submit">Comprar</button>
+                             <button type="submit" class="btn btn-primary">Comprar</button>
                           {% else %}
-                              <button type="button" disabled>Agotado</button>
+                              <button type="button" class="btn btn-default" disabled>Agotado</button>
                           {% endif %}
                       </form>
                   </td>
