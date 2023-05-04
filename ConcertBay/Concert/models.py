@@ -14,7 +14,7 @@ class Localidad(models.Model):
     precio = models.FloatField()
     concierto = models.ForeignKey(Concierto, on_delete=models.PROTECT)
     capacidad = models.IntegerField(default=5)
-    cantidad_disponible = models.IntegerField(default=5)
+    cantidad_disponible = models.IntegerField(default=capacidad)
 
 class Ticket(models.Model):
     usuario = models.ForeignKey('auth.User', on_delete=models.PROTECT)

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>{{ concierto.nombre }}</h1>
+  <p><strong>Artista:</strong> {{ concierto.artista }}</p>
+  <p><strong>Lugar:</strong> {{ concierto.lugar }}</p>
+  <p><strong>Fecha:</strong> {{ concierto.fecha }}</p>
+
+  <h2>Localidades:</h2>
+  <table>
+      <thead>
+          <tr>
+              <th>Nombre</th>
+              <th>Precio</th>
+              <th>Cantidad disponible</th>
+              <th></th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for localidad in localidades %}
+              <tr>
+                  <td>{{ localidad.nombre }}</td>
+                  <td>{{ localidad.precio }}</td>
+                  <td>{{ localidad.cantidad_disponible }}</td>
+                  <td>
+                      <form action="{% url 'Concert:comprar_entrada' concierto_id=concierto.id %}" method="POST">
+                          {% csrf_token %}
+                          <input type="hidden" name="localidad" value="{{ localidad.id }}">
+                          {% if localidad.cantidad_disponible > 0 %}
+                             <button type="submit">Comprar</button>
+                          {% else %}
+                              <button type="button" disabled>Agotado</button>
+                          {% endif %}
+                      </form>
+                  </td>
+              </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+
+{% endblock %}

@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.db.models import Sum
 
 # Create your views here.
 from django.contrib.auth import authenticate, login, logout
@@ -22,7 +23,7 @@ def comprar_entrada(request, concierto_id):
                 concierto=concierto,
                 localidad=localidad,
             )
-            return redirect('Concert:index')
+            return redirect('Concert:compra_list')
         else:
             messages.error(request, f'La localidad {localidad.nombre} está agotada.')
     context = {'concierto': concierto, 'localidades': localidades}
@@ -67,8 +68,12 @@ def registro_request(request):
     return render(request, 'Concert/signup.html', {'form': form})
 
 def index(request):
-    conciertos = Concierto.objects.all()
-    context = {'conciertos': conciertos}
+    conciertos = Concierto.objects.all().order_by('fecha')
+    tickets_disponibles = Localidad.objects.values('concierto').annotate(total_disponibles=Sum('cantidad_disponible'))
+    context = {
+        'conciertos': conciertos,
+        'tickets_disponibles': tickets_disponibles
+    }
     return render(request, 'Concert/index.html', context)
 
 @login_required
@@ -76,3 +81,8 @@ def compra_list(request):
     compras = Ticket.objects.filter(usuario=request.user)
     return render(request, 'Concert/compra_list.html', {'compras': compras})
 
+def concierto_detalle(request, concierto_id):
+    concierto = get_object_or_404(Concierto, pk=concierto_id)
+    localidades = Localidad.objects.filter(concierto=concierto)
+    compras = Ticket.objects.filter(usuario=request.user, concierto=concierto)
+    return render(request, 'Concert/concierto_detalle.html', {'concierto': concierto, 'localidades': localidades, 'çompras': compras})

@@ -2,11 +2,30 @@
 
 {% block content %}
 <h1>Próximos conciertos:</h1>
-<ul>
-{% for concierto in conciertos %}
-    <li><a href="{% url 'Concert:comprar_entrada' concierto_id=concierto.id %}">{{ concierto.artista }} - {{ concierto.lugar }} ({{ concierto.fecha }})</a></li>
-{% empty %}
-    <li>No hay conciertos próximos</li>
-{% endfor %}
-</ul>
+<table>
+  <thead>
+    <tr>
+      <th>Artista</th>
+      <th>Nombre del concierto</th>
+      <th>Lugar</th>
+      <th>Fecha</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for concierto in conciertos %}
+    <tr>
+      <td>{{ concierto.artista }}</td>
+      <td>{{ concierto.nombre }}</td>
+      <td>{{ concierto.lugar }}</td>
+      <td>{{ concierto.fecha }}</td>
+      <td><a href="{% url 'Concert:concierto_detalle' concierto_id=concierto.id %}">Ver más detalles</a></td>
+    </tr>
+  {% empty %}
+    <tr>
+      <td colspan="6">No hay conciertos próximos</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
 {% endblock %}

@@ -23,9 +23,3 @@ class RegistroForm(UserCreationForm):
         user.email = self.cleaned_data['email']
         user.save()
         return user
-
-class UserChangeForm(forms.ModelForm):
-
-    class Meta:
-        model = User
-        fields = ['username', 'email', 'first_name', 'last_name']

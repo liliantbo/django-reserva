@@ -5,7 +5,7 @@
   {% if compras %}
     <ul>
       {% for compra in compras %}
-        <li>{{ compra.entrada.concierto.artista }} - {{ compra.entrada.concierto.lugar }} ({{ compra.entrada.concierto.fecha }}) - {{ compra.fecha }}</li>
+      <li>{{ compra.concierto.artista }} - {{ compra.concierto.lugar }} ({{ compra.concierto.fecha }}) - {{ compra.localidad.nombre }}</li>
       {% endfor %}
     </ul>
   {% else %}
